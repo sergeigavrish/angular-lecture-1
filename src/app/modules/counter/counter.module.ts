@@ -8,6 +8,9 @@ import { CounterButtonComponent } from './components/counter-layout/components/c
 import { AdditionCounterComponent } from './components/addition-counter/addition-counter.component';
 import { MultiplicationCounterComponent } from './components/multiplication-counter/multiplication-counter.component';
 import { CounterPipe } from './pipes/counter.pipe';
+import { CountersStateService } from './services/counters-state.service';
+import { CounterRoutingModule } from './counter-routing.module';
+import { CountersListComponent } from './components/counters-list/counters-list.component';
 
 @NgModule({
     declarations: [
@@ -17,12 +20,14 @@ import { CounterPipe } from './pipes/counter.pipe';
         CounterLayoutComponent,
         AdditionCounterComponent,
         MultiplicationCounterComponent,
-        CounterPipe
+        CounterPipe,
+        CountersListComponent
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        CounterRoutingModule
     ],
-    providers: [],
+    providers: [CountersStateService],
     exports: [CounterMainComponent]
 })
 export class CounterModule { }

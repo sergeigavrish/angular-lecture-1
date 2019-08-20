@@ -20,11 +20,11 @@ export class CounterLayoutComponent implements OnInit {
     }
 
     onAdd() {
-        this.counterService.increase();
+        this.counterService.increase(0, 0);
     }
 
     onReduce() {
-        this.counterService.decrease();
+        this.counterService.decrease(0, 0);
     }
 
 }

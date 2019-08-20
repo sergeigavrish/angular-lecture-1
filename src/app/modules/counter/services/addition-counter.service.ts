@@ -3,19 +3,20 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { CounterService } from '../models/entity/CounterService';
+import { CountersStateService } from './counters-state.service';
 
 @Injectable()
 export class AdditionCounterService extends CounterService {
 
-    readonly counter = new BehaviorSubject<number>(0);
+    constructor(
+        private state: CountersStateService
+    ) { super(); }
 
-    constructor() { super(); }
-
-    increase() {
-        this.counter.next(this.counter.getValue() + 1);
+    increase(id: number, value: number) {
+        this.state.changeCounter(id, value + 1);
     }
 
-    decrease() {
-        this.counter.next(this.counter.getValue() - 1);
+    decrease(id: number, value: number) {
+        this.state.changeCounter(id, value - 1);
     }
 }
