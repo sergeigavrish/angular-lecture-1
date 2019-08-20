@@ -1,21 +1,25 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+
+import { Observable } from 'rxjs';
 
 import { CounterService } from '../models/entity/CounterService';
-import { CountersStateService } from './counters-state.service';
+import { ICounter } from '../models/interfaces/Counter.interface';
+import { REMOTE_STORAGE_TOKEN } from '../providers/remote-storage.provider';
+import { RemoteStorage } from '../models/interfaces/RemoteStorage';
 
 @Injectable()
 export class MultiplicationCounterService extends CounterService {
 
     constructor(
-        private state: CountersStateService
+        @Inject(REMOTE_STORAGE_TOKEN) private remote: RemoteStorage<ICounter>
     ) { super(); }
 
-    increase(id: number, value: number) {
-        this.state.changeCounter(id, value * 2);
+    increase(counter: ICounter): Observable<ICounter> {
+        return this.remote.update({ ...counter, value: counter.value * 2 });
     }
 
-    decrease(id: number, value: number) {
-        this.state.changeCounter(id, value / 2);
+    decrease(counter: ICounter): Observable<ICounter> {
+        return this.remote.update({ ...counter, value: counter.value / 2 });
     }
 
 }

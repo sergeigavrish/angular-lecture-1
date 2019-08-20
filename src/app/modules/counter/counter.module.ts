@@ -8,9 +8,9 @@ import { CounterButtonComponent } from './components/counter-layout/components/c
 import { AdditionCounterComponent } from './components/addition-counter/addition-counter.component';
 import { MultiplicationCounterComponent } from './components/multiplication-counter/multiplication-counter.component';
 import { CounterPipe } from './pipes/counter.pipe';
-import { CountersStateService } from './services/counters-state.service';
 import { CounterRoutingModule } from './counter-routing.module';
 import { CountersListComponent } from './components/counters-list/counters-list.component';
+import { RemoteStorageProvider } from './providers/remote-storage.provider';
 
 @NgModule({
     declarations: [
@@ -27,7 +27,7 @@ import { CountersListComponent } from './components/counters-list/counters-list.
         CommonModule,
         CounterRoutingModule
     ],
-    providers: [CountersStateService],
+    providers: [RemoteStorageProvider],
     exports: [CounterMainComponent]
 })
 export class CounterModule { }

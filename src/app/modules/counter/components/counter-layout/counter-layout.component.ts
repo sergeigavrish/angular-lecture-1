@@ -2,7 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Inject, SkipSelf } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, first, tap } from 'rxjs/operators';
 
 import { ACTIONS_TOKEN } from '../../providers/actions.provider';
 import { ActionTypes, CounterType } from './../../types/index';
@@ -16,7 +16,7 @@ import { ICounter } from '../../models/interfaces/Counter.interface';
 })
 export class CounterLayoutComponent implements OnInit {
 
-    counter$: Observable<ICounter>;
+    counter: ICounter;
 
     constructor(
         @SkipSelf() @Inject(ACTIONS_TOKEN) public actions: Record<ActionTypes, any>,
@@ -25,15 +25,30 @@ export class CounterLayoutComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.counter$ = this.route.data.pipe(map(data => data.counter));
+        this.route.data
+            .pipe(
+                first(),
+                map(data => data.counter)
+            )
+            .subscribe(counter => this.counter = counter);
     }
 
-    onAdd(id: number, value: number) {
-        this.counterService.increase(id, value);
+    onAdd(counter: ICounter) {
+        this.counterService.increase(counter)
+            .pipe(
+                first(),
+                tap(console.log)
+            )
+            .subscribe(data => this.counter = data);
     }
 
-    onReduce(id: number, value: number) {
-        this.counterService.decrease(id, value);
+    onReduce(counter: ICounter) {
+        this.counterService.decrease(counter)
+            .pipe(
+                first(),
+                tap(console.log)
+            )
+            .subscribe(data => this.counter = data);
     }
 
 }

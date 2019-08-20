@@ -1,6 +1,7 @@
-import { Observable, BehaviorSubject } from 'rxjs';
+import { ICounter } from './Counter.interface';
+import { Observable } from 'rxjs';
 
 export interface ICounterService {
-    increase(id: number, value: number): void;
-    decrease(id: number, value: number): void;
+    increase(counter: ICounter): Observable<ICounter>;
+    decrease(counter: ICounter): Observable<ICounter>;
 }
