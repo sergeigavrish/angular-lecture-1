@@ -9,7 +9,7 @@ import { CounterDataResolver } from './resolvers/counter-data.resolver';
 
 const routes: Routes = [
     {
-        path: 'home', component: CounterMainComponent, children: [
+        path: '', component: CounterMainComponent, children: [
             {
                 path: '',
                 component: CountersListComponent,
