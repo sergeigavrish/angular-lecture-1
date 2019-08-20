@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { CoreLayoutComponent } from './components/core-layout/core-layout.component';
 
 
 
 @NgModule({
-    declarations: [PageNotFoundComponent],
+    declarations: [PageNotFoundComponent, CoreLayoutComponent],
     imports: [
-        CommonModule
+        CommonModule,
+        RouterModule
     ],
-    exports: [PageNotFoundComponent]
+    exports: [CoreLayoutComponent]
 })
 export class CoreModule { }
