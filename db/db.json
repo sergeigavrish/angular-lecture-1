@@ -1,0 +1,14 @@
+{
+  "counters": [
+    {
+      "id": 1,
+      "value": 4,
+      "type": "addition"
+    },
+    {
+      "id": 2,
+      "value": 1,
+      "type": "multiplication"
+    }
+  ]
+}
