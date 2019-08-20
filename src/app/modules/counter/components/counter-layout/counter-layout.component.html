@@ -1,3 +1,5 @@
-<app-counter-button [action]="actions.increase" (buttonClick)="onAdd()"></app-counter-button>
-<app-counter-view [count]="counterService.getCounter() | async"></app-counter-view>
-<app-counter-button [action]="actions.decrease" (buttonClick)="onReduce()"></app-counter-button>
+<ng-container *ngIf="(counter$ | async) as counter">
+    <app-counter-button [action]="actions.increase" (buttonClick)="onAdd(counter.id, counter.value)"></app-counter-button>
+    <app-counter-view [count]="counter.value"></app-counter-view>
+    <app-counter-button [action]="actions.decrease" (buttonClick)="onReduce(counter.id, counter.value)"></app-counter-button>
+</ng-container>

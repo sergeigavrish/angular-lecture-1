@@ -10,11 +10,9 @@ import { CountersStateService } from '../../services/counters-state.service';
     styleUrls: ['./counter-main.component.less']
 })
 export class CounterMainComponent implements OnInit {
-    counters$: Observable<any>;
 
-    constructor(private state: CountersStateService) { }
+    constructor() { }
 
     ngOnInit() {
-        this.counters$ = this.state.getCounters();
     }
 }

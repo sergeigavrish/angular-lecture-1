@@ -1,8 +1,13 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Inject, SkipSelf } from '@angular/core';
 
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { ACTIONS_TOKEN } from '../../providers/actions.provider';
-import { ActionTypes } from './../../types/index';
+import { ActionTypes, CounterType } from './../../types/index';
 import { CounterService } from '../../models/entity/CounterService';
+import { ICounter } from '../../models/interfaces/Counter.interface';
 
 @Component({
     selector: 'app-counter-layout',
@@ -11,20 +16,24 @@ import { CounterService } from '../../models/entity/CounterService';
 })
 export class CounterLayoutComponent implements OnInit {
 
+    counter$: Observable<ICounter>;
+
     constructor(
         @SkipSelf() @Inject(ACTIONS_TOKEN) public actions: Record<ActionTypes, any>,
-        public counterService: CounterService
+        private counterService: CounterService,
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit() {
+        this.counter$ = this.route.data.pipe(map(data => data.counter));
     }
 
-    onAdd() {
-        this.counterService.increase(0, 0);
+    onAdd(id: number, value: number) {
+        this.counterService.increase(id, value);
     }
 
-    onReduce() {
-        this.counterService.decrease(0, 0);
+    onReduce(id: number, value: number) {
+        this.counterService.decrease(id, value);
     }
 
 }

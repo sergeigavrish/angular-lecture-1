@@ -1,6 +1,6 @@
 <div 
-    *ngFor="let counter of counters; let i = index"
-    (click)="onClick(i)">
-    <p>value: {{counter.value | async}}</p>
+    *ngFor="let counter of (counters$ | async)"
+    (click)="onClick(counter.id, counter.type)">
+    <p>value: {{counter.value}}</p>
     <p>type: {{counter.type}}</p>
 </div>

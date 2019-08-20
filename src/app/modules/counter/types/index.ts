@@ -13,3 +13,8 @@ export enum ActionTypes {
 export type MultipleActions = Actions.MULTIPLE | Actions.SPLIT;
 
 export type AdditionActions = Actions.ADD | Actions.REDUCE;
+
+export enum CounterType {
+    ADDITION = 'addition',
+    MULTIPLICATION = 'multiplication',
+}

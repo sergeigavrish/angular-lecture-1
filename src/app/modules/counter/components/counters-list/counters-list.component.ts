@@ -1,7 +1,11 @@
-import { Router, ActivatedRoute } from "@angular/router";
-import { CountersStateService } from "./../../services/counters-state.service";
+import { CounterType } from './../../types/index';
 import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from "rxjs";
+import { Router, ActivatedRoute } from '@angular/router';
+
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { ICounter } from '../../models/interfaces/Counter.interface';
 
 @Component({
     selector: 'app-counters-list',
@@ -10,7 +14,7 @@ import { Observable } from "rxjs";
 })
 export class CountersListComponent implements OnInit {
 
-    @Input() counters: any;
+    counters$: Observable<ICounter[]>;
 
     constructor(
         private router: Router,
@@ -18,11 +22,14 @@ export class CountersListComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.counters$ = this.route.data.pipe(
+            map(data => data.counters)
+        );
     }
 
-    onClick(i: number) {
+    onClick(id: number, type: CounterType) {
         this.router.navigate(
-            ['addition'],
+            [id, type],
             {
                 relativeTo: this.route
             }
