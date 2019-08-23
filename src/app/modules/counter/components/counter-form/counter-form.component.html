@@ -1,0 +1,30 @@
+<form #form="ngForm" (ngSubmit)="onSubmit()">
+    <fieldset>
+        <label>
+            <span>Value</span>
+            <input #control="ngModel" name="value" [(ngModel)]="counter.value" type="number" required>
+            <div *ngIf="control.invalid && (control.dirty || control.touched)">
+                <span *ngIf="control.errors.required">
+                    Value is required
+                </span>
+            </div>
+        </label>
+        <label>
+            <span>Type</span>
+            <select required #control="ngModel" name="type" [(ngModel)]="counter.type">
+                <option *ngFor="let item of types" [value]="item">{{item}}</option>
+            </select>
+            <div *ngIf="control.invalid && (control.dirty || control.touched)">
+                <span *ngIf="control.errors.required">
+                    Type is required
+                </span>
+            </div>
+        </label>
+    </fieldset>
+    <button [disabled]="form.invalid" type="submit">save</button>
+</form>
+<div>
+    <span>Form value</span>
+    <p>{{form.value.value}}</p>
+    <p>{{form.value.type}}</p>
+</div>

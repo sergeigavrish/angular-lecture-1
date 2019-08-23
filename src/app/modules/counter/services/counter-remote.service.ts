@@ -20,8 +20,12 @@ export class CounterRemoteService implements RemoteStorage<ICounter> {
         return this.http.get<ICounter>(`${environment.backendUrl}/counters/${id}`);
     }
 
-    update(counter: ICounter) {
-        return this.http.put<ICounter>(`${environment.backendUrl}/counters/${counter.id}`, counter);
+    update(data: ICounter) {
+        return this.http.put<ICounter>(`${environment.backendUrl}/counters/${data.id}`, data);
+    }
+
+    create(data: ICounter) {
+        return this.http.post<ICounter>(`${environment.backendUrl}/counters/`, data);
     }
 
 }

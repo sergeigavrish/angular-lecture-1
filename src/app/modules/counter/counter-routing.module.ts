@@ -6,6 +6,8 @@ import { CountersListComponent } from './components/counters-list/counters-list.
 import { ListDataResolver } from './resolvers/list-data.resolver';
 import { MultiplicationCounterComponent } from './components/multiplication-counter/multiplication-counter.component';
 import { CounterDataResolver } from './resolvers/counter-data.resolver';
+import { CounterFormComponent } from './components/counter-form/counter-form.component';
+import { CounterFormResolver } from './resolvers/counter-form.resolver';
 
 const routes: Routes = [
     {
@@ -18,7 +20,9 @@ const routes: Routes = [
                 }
             },
             { path: ':id/addition', component: AdditionCounterComponent, resolve: { counter: CounterDataResolver } },
-            { path: ':id/multiplication', component: MultiplicationCounterComponent, resolve: { counter: CounterDataResolver } }
+            { path: ':id/multiplication', component: MultiplicationCounterComponent, resolve: { counter: CounterDataResolver } },
+            { path: 'add', component: CounterFormComponent, resolve: { counter: CounterFormResolver } },
+            { path: ':id/edit', component: CounterFormComponent, resolve: { counter: CounterFormResolver } }
         ]
     },
 ];
@@ -26,7 +30,7 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
-    providers: [ListDataResolver, CounterDataResolver],
+    providers: [ListDataResolver, CounterDataResolver, CounterFormResolver],
     declarations: [],
 })
 export class CounterRoutingModule { }

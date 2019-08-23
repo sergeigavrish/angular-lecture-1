@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { CounterMainComponent } from './components/counter-main/counter-main.component';
 import { CounterLayoutComponent } from './components/counter-layout/counter-layout.component';
@@ -11,6 +12,8 @@ import { CounterPipe } from './pipes/counter.pipe';
 import { CounterRoutingModule } from './counter-routing.module';
 import { CountersListComponent } from './components/counters-list/counters-list.component';
 import { RemoteStorageProvider } from './providers/remote-storage.provider';
+import { CounterFormComponent } from './components/counter-form/counter-form.component';
+import { CounterTypeProvider } from './providers/counter-type.provider';
 
 @NgModule({
     declarations: [
@@ -21,13 +24,15 @@ import { RemoteStorageProvider } from './providers/remote-storage.provider';
         AdditionCounterComponent,
         MultiplicationCounterComponent,
         CounterPipe,
-        CountersListComponent
+        CountersListComponent,
+        CounterFormComponent
     ],
     imports: [
         CommonModule,
+        FormsModule,
         CounterRoutingModule
     ],
-    providers: [RemoteStorageProvider],
+    providers: [RemoteStorageProvider, CounterTypeProvider],
     exports: [CounterMainComponent]
 })
 export class CounterModule { }

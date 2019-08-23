@@ -1,6 +1,8 @@
+<button (click)="onAdd()">Add new counter</button>
 <div 
     *ngFor="let counter of (counters$ | async)"
     (click)="onClick(counter.id, counter.type)">
     <p>value: {{counter.value}}</p>
     <p>type: {{counter.type}}</p>
+    <button (click)="onEdit(counter.id); $event.stopPropagation()">edit</button>
 </div>

@@ -36,4 +36,12 @@ export class CountersListComponent implements OnInit {
         );
     }
 
+    onAdd() {
+        this.router.navigate(['/home/add']);
+    }
+
+    onEdit(id: number) {
+        this.router.navigate([`/home/${id}/edit`]);
+    }
+
 }
